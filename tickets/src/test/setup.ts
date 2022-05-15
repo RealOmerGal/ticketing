@@ -1,13 +1,29 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
+import request from 'supertest';
+import { app } from '../app';
+import jwt from 'jsonwebtoken';
 
-let mongoServer: MongoMemoryServer;
+declare global {
+    namespace NodeJS {
+        interface Global {
+            signin(): string;
+        }
+    }
+}
+
+let mongo: any;
 beforeAll(async () => {
     process.env.JWT_KEY = 'asdfasdf';
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-    mongoServer = await MongoMemoryServer.create();
+    mongo = new MongoMemoryServer();
+    const mongoUri = await mongo.getUri();
 
-    await mongoose.connect(mongoServer.getUri(), {});
+    await mongoose.connect(mongoUri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
 });
 
 beforeEach(async () => {
@@ -19,9 +35,19 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-    if (mongoServer) {
-        await mongoServer.stop();
-        await mongoose.connection.close();
-    }
-
+    await mongo.stop();
+    await mongoose.connection.close();
 });
+
+global.signin = () => {
+
+    const payload = {
+        id: new mongoose.Types.ObjectId().toHexString(),
+        email: 'test@test.com'
+    };
+    const token = jwt.sign(payload, process.env.JWT_KEY!);
+    const session = { jwt: token };
+    const base64 = Buffer.from(JSON.stringify(session)).toString('base64');
+    return `session=${base64}`;
+
+};

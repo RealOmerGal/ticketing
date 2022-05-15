@@ -9,20 +9,21 @@ import { signupRouter } from "./routes/signup";
 import { errorHandler, NotFoundError } from "@sgticketing/common";
 
 const app = express();
-app.set("trust proxy", true);
+app.set('trust proxy', true);
 app.use(json());
 app.use(
     cookieSession({
         signed: false,
-        secure: true,
+        secure: process.env.NODE_ENV !== 'test',
     })
 );
+
 app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
 
-app.all("*", async (req, res) => {
+app.all('*', async (req, res) => {
     throw new NotFoundError();
 });
 
