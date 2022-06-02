@@ -1,16 +1,15 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import request from 'supertest';
-import { app } from '../app';
+
 import jwt from 'jsonwebtoken';
 
 declare global {
-    namespace NodeJS {
-        interface Global {
-            signin(): string;
-        }
-    }
+    var signin: () => string;
 }
+
+
+jest.mock('../../nats-wrapper');
+
 
 let mongo: any;
 beforeAll(async () => {
@@ -20,13 +19,11 @@ beforeAll(async () => {
     mongo = new MongoMemoryServer();
     const mongoUri = await mongo.getUri();
 
-    await mongoose.connect(mongoUri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
+    await mongoose.connect(mongoUri, {});
 });
 
 beforeEach(async () => {
+    jest.clearAllMocks();
     const collections = await mongoose.connection.db.collections();
 
     for (let collection of collections) {

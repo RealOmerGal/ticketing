@@ -6,7 +6,7 @@ import { createTickerRouter } from "./routes/new";
 import { showTicketRouter } from "./routes/show";
 import { indexTicketRouter } from "./routes";
 import { updateTicketRouter } from "./routes/update";
-import { errorHandler, NotFoundError, currentUser } from "igorgcommon";
+import { errorHandler, NotFoundError, currentUser } from "@illaygal/ogcommon";
 
 const app = express();
 app.set('trust proxy', true);

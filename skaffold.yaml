@@ -18,6 +18,14 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: us.gcr.io/ticketing-dev-349211/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: .
     - image: us.gcr.io/ticketing-dev-349211/tickets
       context: tickets
       docker:
@@ -26,11 +34,19 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: us.gcr.io/ticketing-dev-349211/client
-      context: client
+    - image: us.gcr.io/ticketing-dev-349211/orders
+      context: orders
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "**/*.js"
+          - src: "src/**/*.ts"
+            dest: .
+    - image: us.gcr.io/ticketing-dev-349211/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
             dest: .

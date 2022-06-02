@@ -1,4 +1,4 @@
-import { NotFoundError } from '@sgticketing/common';
+import { NotFoundError } from '@illaygal/ogcommon';
 import express, { Request, Response } from 'express';
 import { Ticket } from '../models/ticket';
 
