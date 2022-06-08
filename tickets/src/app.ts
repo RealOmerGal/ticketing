@@ -2,7 +2,7 @@ import express from "express";
 import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
-import { createTickerRouter } from "./routes/new";
+import { createTicketRouter } from "./routes/new";
 import { showTicketRouter } from "./routes/show";
 import { indexTicketRouter } from "./routes";
 import { updateTicketRouter } from "./routes/update";
@@ -20,7 +20,7 @@ app.use(
 
 app.use(currentUser);
 app.use(showTicketRouter);
-app.use(createTickerRouter);
+app.use(createTicketRouter);
 app.use(indexTicketRouter);
 app.use(updateTicketRouter);
 

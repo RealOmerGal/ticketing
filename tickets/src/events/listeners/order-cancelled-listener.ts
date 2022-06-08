@@ -1,6 +1,5 @@
-import { OrderCancelledEvent, Subjects } from '@illaygal/ogcommon';
+import { Listener, OrderCancelledEvent, Subjects } from '@illaygal/ogcommon';
 import { queueGroupName } from './queue-group-name';
-import Listener from '@illaygal/ogcommon/build/events/base-listener';
 import { Message } from 'node-nats-streaming';
 import { Ticket } from '../../models/ticket';
 import { TicketUpdatedPublisher } from '../publishers/ticket-updated-publisher';

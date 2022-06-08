@@ -1,5 +1,4 @@
-import { Subjects, TicketCreatedEvent } from '@illaygal/ogcommon';
-import Listener from '@illaygal/ogcommon/build/events/base-listener';
+import { Listener, Subjects, TicketCreatedEvent } from '@illaygal/ogcommon';
 import { Message } from 'node-nats-streaming';
 import { queueGroupName } from './queue-group-name';
 import { Ticket } from '../../models/ticket';
