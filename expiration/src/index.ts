@@ -27,6 +27,9 @@ const start = async () => {
 
     new OrderCreatedListener(natsWrapper.client).listen();
   } catch (err) {
+    console.log(process.env.NATS_CLUSTER_ID,
+      process.env.NATS_CLIENT_ID,
+      process.env.NATS_URL)
     console.error(err);
   }
 };

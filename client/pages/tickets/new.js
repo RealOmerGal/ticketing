@@ -53,7 +53,9 @@ const NewTicket = () => {
           />
         </div>
         {errors}
-        <button className="btn btn-primary">Submit</button>
+        <button className="btn btn-primary" style={{ marginTop: "1vh" }}>
+          Submit
+        </button>
       </form>
     </div>
   );

@@ -42,7 +42,9 @@ export default () => {
         />
       </div>
       {errors}
-      <button className="btn btn-primary">Sign In</button>
+      <button className="btn btn-primary" style={{ marginTop: "1vh" }}>
+        Sign In
+      </button>
     </form>
   );
 };

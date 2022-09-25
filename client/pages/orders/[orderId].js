@@ -31,7 +31,6 @@ const OrderShow = ({ order, currentUser }) => {
   if (timeLeft < 0) {
     return <div>Order Expired</div>;
   }
-
   return (
     <div>
       Time left to pay: {timeLeft} seconds
@@ -40,6 +39,8 @@ const OrderShow = ({ order, currentUser }) => {
         stripeKey="pk_test_51L7i4RGHAMj9Boauziuk9EFyiXAzPsv7RWE1ZWBsF6dtEG77WnbbdGmUyE1cyuAfa5oMBHnm41efExk7KU3sAR3p00lv4rPKFn"
         amount={order.ticket.price * 100}
         email={currentUser.email}
+        description="Purchase the ticket"
+        name={order.ticket.title}
       />
       {errors}
     </div>
